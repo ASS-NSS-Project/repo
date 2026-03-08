@@ -1,5 +1,7 @@
 # repo
-Amazing project - TODO change description
+
+## Git Commit Message Generator
+[link](https://utilityfordev.com/git-commit-generator)
 
 ## Poetry 101
 
