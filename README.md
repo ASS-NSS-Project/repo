@@ -1,35 +1,35 @@
 # Repo
-See conventions below 
+Níže jsou jakési konvence, které by bylo vhodné dodržovat.
 
 ## Git Commit Message Generator
 [link](https://utilityfordev.com/git-commit-generator)
 
 ## Poetry 101
 
-❗ Knihovny `pyyaml`, `pre-commit` a `conventional-pre-commits` jsou pouze priklady pro pouziti Poetry (v projektu jiz jsou instalovane).
+❗ Knihovny `pyyaml`, `pre-commit` a `conventional-pre-commits` jsou pouze příklady pro použití Poetry (v projektu již jsou instalované).
 
-Pokud menim soubor `pyproject.toml`
+Pokud měním obsah souboru `pyproject.toml` (dependency tracker), používám následující dva příkazy:
 ```bash
 poetry lock
 poetry install
 ```
 
-Pridani knihovny `pyyaml` do projektu
+Přidaní knihovny `pyyaml` do projektu:
 ```bash
 poetry add pyyaml
 ```
 
-Pridani knihoven `pre-commit` a `conventional-pre-commits` do konkretni groupy `dev`, nikoli globalne pro cely projekt
+Přidání knihoven `pre-commit` a `conventional-pre-commits` do konkretní projektové groupy `dev`, nikoli globalně pro celý projekt:
 ```bash
 poetry add --dev pre-commit conventional-pre-commits
 ```
 
-Poetry run => spouteni prikazu pomoci poetry (e.g., interpretace `main.py`)
+Poetry run => spouštění příkazů pomocí Poetry (e.g., interpretace `main.py`):
 ```bash
 poetry run python src/backend/main.py
 ```
 
-Aktivace poetry prostredi
+Aktivace Poetry prostředí:
 ```bash
 poetry env activate
 ```
