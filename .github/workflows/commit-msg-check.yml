@@ -31,5 +31,18 @@ jobs:
 
       - name: Run pre-commit commit-msg hooks
         run: |
-          # Run only commit-msg stage hooks across the repo
-          poetry run pre-commit run --hook-stage commit-msg --all-files
+          # 1. Create a temporary file to hold the commit message
+          MSG_FILE=$(mktemp)
+
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            # For PRs, we usually want to validate the HEAD commit of the branch
+            git log -1 --format=%B ${{ github.event.pull_request.head.sha }} > "$MSG_FILE"
+            echo "Checking PR Head Commit Message..."
+          else
+            # For pushes to main, check the latest commit
+            git log -1 --format=%B > "$MSG_FILE"
+            echo "Checking Latest Push Commit Message..."
+          fi
+
+          # 2. Run pre-commit and explicitly point to our temp file
+          poetry run pre-commit run --hook-stage commit-msg --commit-msg-filename "$MSG_FILE"
