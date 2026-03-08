@@ -1,0 +1,35 @@
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main]
+
+jobs:
+  commit-msg-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (full history)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.13"
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v2
+        with:
+          version: latest
+
+      - name: Install dependencies (including dev)
+        run: |
+          # optional: keep venv in repo for predictable paths
+          poetry config virtualenvs.create false --local || true
+          poetry install --with dev
+
+      - name: Run pre-commit commit-msg hooks
+        run: |
+          # Run only commit-msg stage hooks across the repo
+          poetry run pre-commit run --hook-stage commit-msg --all-files
