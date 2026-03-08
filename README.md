@@ -1,5 +1,5 @@
-# repo
-Example repository - conventions
+# Repo
+See conventions below 
 
 ## Git Commit Message Generator
 [link](https://utilityfordev.com/git-commit-generator)
